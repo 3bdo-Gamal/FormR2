@@ -412,7 +412,7 @@
     data.photo = await fileToBase64(photoFile);
 
     // === SEND TO GOOGLE SCRIPT ===
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzZquFwADOyqGzCuehqfpY7kwenQv84xDkbSxw_3l6rFwPGX7OwaCkjO4BwEL_89g7Mog/exec';
+    const scriptURL = '/.netlify/functions/submit';
 
     try {
       const res = await fetch(scriptURL, {
