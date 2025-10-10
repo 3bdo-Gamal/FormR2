@@ -22,264 +22,284 @@
         </div>
 
         <div class="form-container">
-            <form id="mainForm">
-                <!-- Page 1: General Information -->
-                <div class="form-page active" id="page1">
-                    <div class="form-group">
-                        <label>الاسم <span class="required">*</span></label>
-                        <input type="text" name="name" required minlength="3" id="name">
-                    </div>
+           <form id="mainForm">
+  <!-- Page 1 -->
+  <div class="form-page active" id="page1">
+    <div class="form-group">
+      <label>الاسم <span class="required">*</span></label>
+      <input type="text" name="name" required minlength="3" id="name">
+      <div class="error-message" id="name-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>السن <span class="required">*</span></label>
-                        <input type="number" name="age" required min="18" max="60" id="age">
-                    </div>
+    <div class="form-group">
+      <label>السن <span class="required">*</span></label>
+      <input type="number" name="age" required min="18" max="60" id="age">
+      <div class="error-message" id="age-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>الرقم القومي <span class="required">*</span></label>
-                        <input type="text" name="nationalId" required pattern="[0-9]{14}" maxlength="14" id="nationalId">
-                    </div>
+    <div class="form-group">
+      <label>الرقم القومي <span class="required">*</span></label>
+      <input type="text" name="nationalId" required pattern="[0-9]{14}" maxlength="14" id="nationalId">
+      <div class="error-message" id="nationalId-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>رقم التليفون المحمول <span class="required">*</span></label>
-                        <input type="text" name="phone" required pattern="^01[0125][0-9]{8}$" maxlength="11" id="phone">
-                    </div>
+    <div class="form-group">
+      <label>رقم التليفون المحمول <span class="required">*</span></label>
+      <input type="text" name="phone" required pattern="^01[0125][0-9]{8}$" maxlength="11" id="phone">
+      <div class="error-message" id="phone-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>رقم تواصل واتس <span class="required">*</span></label>
-                        <input type="text" name="whatsapp" required pattern="^01[0125][0-9]{8}$" maxlength="11" id="whatsapp">
-                    </div>
+    <div class="form-group">
+      <label>رقم تواصل واتس <span class="required">*</span></label>
+      <input type="text" name="whatsapp" required pattern="^01[0125][0-9]{8}$" maxlength="11" id="whatsapp">
+      <div class="error-message" id="whatsapp-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>الإيميل <span class="required">*</span></label>
-                        <input type="email" name="email" required>
-                    </div>
+    <div class="form-group">
+      <label>الإيميل <span class="required">*</span></label>
+      <input type="email" name="email" required>
+      <div class="error-message" id="email-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>النوع <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="gender" value="ذكر" required id="male">
-                                <label for="male" style="margin: 0;">ذكر</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="gender" value="أنثى" required id="female">
-                                <label for="female" style="margin: 0;">أنثى</label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>النوع <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="gender" value="ذكر" required id="male">
+          <label for="male">ذكر</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="gender" value="أنثى" required id="female">
+          <label for="female">أنثى</label>
+        </div>
+      </div>
+      <div class="error-message" id="gender-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>المحافظة <span class="required">*</span></label>
-                        <select name="governorate" required>
-                            <option value="">اختر المحافظة</option>
-                            <option value="القاهرة">القاهرة</option>
-                            <option value="الجيزة">الجيزة</option>
-                            <option value="الإسكندرية">الإسكندرية</option>
-                            <option value="الدقهلية">الدقهلية</option>
-                            <option value="البحر الأحمر">البحر الأحمر</option>
-                            <option value="البحيرة">البحيرة</option>
-                            <option value="الفيوم">الفيوم</option>
-                            <option value="الغربية">الغربية</option>
-                            <option value="الإسماعيلية">الإسماعيلية</option>
-                            <option value="المنوفية">المنوفية</option>
-                            <option value="المنيا">المنيا</option>
-                            <option value="القليوبية">القليوبية</option>
-                            <option value="الوادي الجديد">الوادي الجديد</option>
-                            <option value="السويس">السويس</option>
-                            <option value="اسوان">اسوان</option>
-                            <option value="اسيوط">اسيوط</option>
-                            <option value="بني سويف">بني سويف</option>
-                            <option value="بورسعيد">بورسعيد</option>
-                            <option value="دمياط">دمياط</option>
-                            <option value="الشرقية">الشرقية</option>
-                            <option value="جنوب سيناء">جنوب سيناء</option>
-                            <option value="كفر الشيخ">كفر الشيخ</option>
-                            <option value="مطروح">مطروح</option>
-                            <option value="الأقصر">الأقصر</option>
-                            <option value="قنا">قنا</option>
-                            <option value="شمال سيناء">شمال سيناء</option>
-                            <option value="سوهاج">سوهاج</option>
-                        </select>
-                    </div>
+    <div class="form-group">
+      <label>المحافظة <span class="required">*</span></label>
+      <select name="governorate" required>
+        <option value="">اختر المحافظة</option>
+        <option value="القاهرة">القاهرة</option>
+        <option value="الجيزة">الجيزة</option>
+        <option value="الإسكندرية">الإسكندرية</option>
+        <option value="الدقهلية">الدقهلية</option>
+        <option value="البحر الأحمر">البحر الأحمر</option>
+        <option value="البحيرة">البحيرة</option>
+        <option value="الفيوم">الفيوم</option>
+        <option value="الغربية">الغربية</option>
+        <option value="الإسماعيلية">الإسماعيلية</option>
+        <option value="المنوفية">المنوفية</option>
+        <option value="المنيا">المنيا</option>
+        <option value="القليوبية">القليوبية</option>
+        <option value="الوادي الجديد">الوادي الجديد</option>
+        <option value="السويس">السويس</option>
+        <option value="اسوان">اسوان</option>
+        <option value="اسيوط">اسيوط</option>
+        <option value="بني سويف">بني سويف</option>
+        <option value="بورسعيد">بورسعيد</option>
+        <option value="دمياط">دمياط</option>
+        <option value="الشرقية">الشرقية</option>
+        <option value="جنوب سيناء">جنوب سيناء</option>
+        <option value="كفر الشيخ">كفر الشيخ</option>
+        <option value="مطروح">مطروح</option>
+        <option value="الأقصر">الأقصر</option>
+        <option value="قنا">قنا</option>
+        <option value="شمال سيناء">شمال سيناء</option>
+        <option value="سوهاج">سوهاج</option>
+      </select>
+      <div class="error-message" id="governorate-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>العنوان <span class="required">*</span></label>
-                        <textarea name="address" required rows="3"></textarea>
-                    </div>
+    <div class="form-group">
+      <label>العنوان <span class="required">*</span></label>
+      <textarea name="address" required rows="3"></textarea>
+      <div class="error-message" id="address-error"></div>
+    </div>
 
-                    <div class="button-group">
-                        <button type="button" class="btn-next" onclick="nextPage()">التالي</button>
-                    </div>
-                </div>
+    <div class="button-group">
+      <button type="button" class="btn-next" onclick="nextPage()">التالي</button>
+    </div>
+  </div>
 
-                
-                <div class="form-page" id="page2">
-                    <div class="form-group">
-                        <label>الحالة <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="studentStatus" value="طالب" required id="student">
-                                <label for="student" style="margin: 0;">طالب</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="studentStatus" value="خريج" required id="graduate">
-                                <label for="graduate" style="margin: 0;">خريج</label>
-                            </div>
-                        </div>
-                    </div>
+  <!-- Page 2 -->
+  <div class="form-page" id="page2">
+    <div class="form-group">
+      <label>الحالة <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="studentStatus" value="طالب" required id="student">
+          <label for="student">طالب</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="studentStatus" value="خريج" required id="graduate">
+          <label for="graduate">خريج</label>
+        </div>
+      </div>
+      <div class="error-message" id="studentStatus-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>الجامعة <span class="required">*</span></label>
-                        <input type="text" name="university" required>
-                    </div>
+    <div class="form-group">
+      <label>الجامعة <span class="required">*</span></label>
+      <input type="text" name="university" required>
+      <div class="error-message" id="university-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>الكلية <span class="required">*</span></label>
-                        <input type="text" name="faculty" required>
-                    </div>
+    <div class="form-group">
+      <label>الكلية <span class="required">*</span></label>
+      <input type="text" name="faculty" required>
+      <div class="error-message" id="faculty-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>سنة التخرج <span class="required">*</span></label>
-                        <input type="number" name="graduationYear" required min="2010" max="2030" id="graduationYear">
-                    </div>
+    <div class="form-group">
+      <label>سنة التخرج <span class="required">*</span></label>
+      <input type="number" name="graduationYear" required min="2010" max="2030" id="graduationYear">
+      <div class="error-message" id="graduationYear-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>هل حضرت المرحلة الأولى من البرنامج؟ <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="phase1" value="نعم" required id="phase1Yes">
-                                <label for="phase1Yes" style="margin: 0;">نعم</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="phase1" value="لا" required id="phase1No">
-                                <label for="phase1No" style="margin: 0;">لا</label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>هل حضرت المرحلة الأولى من البرنامج؟ <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="phase1" value="نعم" required id="phase1Yes">
+          <label for="phase1Yes">نعم</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="phase1" value="لا" required id="phase1No">
+          <label for="phase1No">لا</label>
+        </div>
+      </div>
+      <div class="error-message" id="phase1-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>هل أنت من مستفيدي وحدات التضامن بالجامعات؟ <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="solidarity" value="نعم" required id="solidarityYes">
-                                <label for="solidarityYes" style="margin: 0;">نعم</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="solidarity" value="لا" required id="solidarityNo">
-                                <label for="solidarityNo" style="margin: 0;">لا</label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>هل أنت من مستفيدي وحدات التضامن بالجامعات؟ <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="solidarity" value="نعم" required id="solidarityYes">
+          <label for="solidarityYes">نعم</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="solidarity" value="لا" required id="solidarityNo">
+          <label for="solidarityNo">لا</label>
+        </div>
+      </div>
+      <div class="error-message" id="solidarity-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>هل أنت من ذوي الهمم؟ <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="specialNeeds" value="نعم" required id="specialNeedsYes">
-                                <label for="specialNeedsYes" style="margin: 0;">نعم</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="specialNeeds" value="لا" required id="specialNeedsNo">
-                                <label for="specialNeedsNo" style="margin: 0;">لا</label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>هل أنت من ذوي الهمم؟ <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="specialNeeds" value="نعم" required id="specialNeedsYes">
+          <label for="specialNeedsYes">نعم</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="specialNeeds" value="لا" required id="specialNeedsNo">
+          <label for="specialNeedsNo">لا</label>
+        </div>
+      </div>
+      <div class="error-message" id="specialNeeds-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>هل تمتلك لابتوب؟ <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="hasLaptop" value="نعم" required id="laptopYes">
-                                <label for="laptopYes" style="margin: 0;">نعم</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="hasLaptop" value="لا" required id="laptopNo">
-                                <label for="laptopNo" style="margin: 0;">لا</label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>هل أنت من طلاب تكافل و كرامه؟ <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="Takafol" value="نعم" required id="TakafolYes">
+          <label for="TakafolYes">نعم</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="Takafol" value="لا" required id="TakafolNo">
+          <label for="TakafolNo">لا</label>
+        </div>
+      </div>
+      <div class="error-message" id="Takafol-error"></div>
+    </div>
 
-                    <div class="button-group">
-                        <button type="button" class="btn-back" onclick="prevPage()">السابق</button>
-                        <button type="button" class="btn-next" onclick="nextPage()">التالي</button>
-                    </div>
-                </div>
+    <div class="form-group">
+      <label>هل تمتلك لابتوب؟ <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="hasLaptop" value="نعم" required id="laptopYes">
+          <label for="laptopYes">نعم</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="hasLaptop" value="لا" required id="laptopNo">
+          <label for="laptopNo">لا</label>
+        </div>
+      </div>
+      <div class="error-message" id="hasLaptop-error"></div>
+    </div>
 
-                
-                <div class="form-page" id="page3">
-                    <div class="form-group">
-                        <label>مجال التدريب (اختر واحد فقط) <span class="required">*</span></label>
-                        <div class="training-select">
-                            <label class="training-option">
-                                <input type="radio" name="training" value="التسويق الرقمي - Digital Marketing" required>
-                                <span>التسويق الرقمي - Digital Marketing</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="كتابة المحتوى - Content Writing" required>
-                                <span>كتابة المحتوى - Content Writing</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="التكنولوجيا المالية - Financial Technology" required>
-                                <span>التكنولوجيا المالية - Financial Technology</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="التجارة الالكترونية - E-Commerce" required>
-                                <span>التجارة الالكترونية - E-Commerce</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="التدريس - Teaching (طلاب آداب وتربية فقط)" required>
-                                <span>التدريس - Teaching (طلاب آداب وتربية فقط)</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="الموارد البشرية - Human Resources" required>
-                                <span>الموارد البشرية - Human Resources</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="تطوير الأعمال والمبيعات - Business Development & Sales" required>
-                                <span>تطوير الأعمال والمبيعات - Business Development & Sales</span>
-                            </label>
-                            <label class="training-option">
-                                <input type="radio" name="training" value="البرمجة والذكاء الاصطناعي - Programming & AI (يشترط امتلاك لابتوب)" required>
-                                <span>البرمجة والذكاء الاصطناعي - Programming & AI (يشترط امتلاك لابتوب)</span>
-                            </label>
-                        </div>
-                    </div>
+    <div class="button-group">
+      <button type="button" class="btn-back" onclick="prevPage()">السابق</button>
+      <button type="button" class="btn-next" onclick="nextPage()">التالي</button>
+    </div>
+  </div>
 
-                    <div class="form-group">
-                        <label>السيرة الذاتية (CV) - اختياري</label>
-                        <div class="file-input-wrapper">
-                            <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx">
-                            <label for="cv" class="file-input-label">اضغط لاختيار الملف</label>
-                            <div class="file-name" id="cvName"></div>
-                        </div>
-                    </div>
+  <!-- Page 3 -->
+  <div class="form-page" id="page3">
+    <div class="form-group">
+      <label>مجال التدريب (اختر واحد فقط) <span class="required">*</span></label>
+      <div class="training-select">
+        <!-- خيارات الكورسات -->
+      </div>
+      <div class="error-message" id="training-error"></div>
+    </div>
 
-                    <div class="form-group">
-                        <label>صورة البطاقة <span class="required">*</span></label>
-                        <div class="file-input-wrapper">
-                            <input type="file" name="idCard" id="idCard" accept="image/*" required>
-                            <label for="idCard" class="file-input-label">اضغط لاختيار الصورة</label>
-                            <div class="file-name" id="idCardName"></div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>هل تعرف أي شيء عن المجال الذي اخترته؟</label>
+      <textarea name="knowledge_about_field" rows="3" placeholder="اكتب بإيجاز ما تعرفه عن المجال..."></textarea>
+    </div>
 
-                    <div class="form-group">
-                        <label>صورة شخصية <span class="required">*</span></label>
-                        <div class="file-input-wrapper">
-                            <input type="file" name="photo" id="photo" accept="image/*" required>
-                            <label for="photo" class="file-input-label">اضغط لاختيار الصورة</label>
-                            <div class="file-name" id="photoName"></div>
-                        </div>
-                    </div>
+    <div class="form-group">
+      <label>لماذا اخترت هذا المجال؟</label>
+      <textarea name="reason_for_choice" rows="3" placeholder="اذكر السبب الذي جعلك تختار هذا المجال..."></textarea>
+    </div>
 
-                    <div class="button-group">
-                        <button type="button" class="btn-back" onclick="prevPage()">السابق</button>
-                        <button type="submit" class="btn-submit">إرسال</button>
-                    </div>
-                </div>
+    <div class="form-group">
+      <label>ما الذي تتوقع أن تتعلمه في هذا المجال؟</label>
+      <textarea name="expectations_from_field" rows="3" placeholder="اكتب ما تتوقع أن تتعلمه أثناء التدريب..."></textarea>
+    </div>
 
-                <!-- Success Message -->
+    <div class="form-group">
+      <label>السيرة الذاتية (CV) - اختياري</label>
+      <div class="file-input-wrapper">
+        <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx">
+        <label for="cv" class="file-input-label">اضغط لاختيار الملف</label>
+        <div class="file-name" id="cvName"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>صورة البطاقة <span class="required">*</span></label>
+      <div class="file-input-wrapper">
+        <input type="file" name="idCard" id="idCard" accept="image/*" required>
+        <label for="idCard" class="file-input-label">اضغط لاختيار الصورة</label>
+        <div class="file-name" id="idCardName"></div>
+      </div>
+      <div class="error-message" id="idCard-error"></div>
+    </div>
+
+    <div class="form-group">
+      <label>صورة شخصية <span class="required">*</span></label>
+      <div class="file-input-wrapper">
+        <input type="file" name="photo" id="photo" accept="image/*" required>
+        <label for="photo" class="file-input-label">اضغط لاختيار الصورة</label>
+        <div class="file-name" id="photoName"></div>
+      </div>
+      <div class="error-message" id="photo-error"></div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="btn-back" onclick="prevPage()">السابق</button>
+      <button type="submit" class="btn-submit">إرسال</button>
+    </div>
+  </div>
+</form>
+
+
                 <div class="success-message" id="successMessage">
                     <div class="success-icon">✓</div>
                     <h2 style="color: #092c27; margin-bottom: 15px;">تم إرسال البيانات بنجاح!</h2>
@@ -374,66 +394,59 @@
     return isValid;
 }
 
-  // === HANDLE FORM SUBMIT ===
   document.getElementById('mainForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const formElements = new FormData(this);
-    const data = {};
+  const formElements = new FormData(this);
+  const data = {};
 
-    for (let [key, value] of formElements.entries()) {
-      if (!(value instanceof File)) data[key] = value;
+  for (let [key, value] of formElements.entries()) {
+    if (!(value instanceof File)) data[key] = value;
+  }
+
+  // --- Upload files to Cloudinary ---
+  async function uploadToCloudinary(file) {
+    const url = `https://api.cloudinary.com/v1_1/759673747112329/upload`;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "unsigned_upload"); // استخدم الـpreset اللي عملته
+
+    const res = await fetch(url, { method: "POST", body: formData });
+    const result = await res.json();
+    return result.secure_url;
+  }
+
+  const cvFile = document.getElementById('cv').files[0];
+  const idFile = document.getElementById('idCard').files[0];
+  const photoFile = document.getElementById('photo').files[0];
+
+  if (cvFile) data.cv = await uploadToCloudinary(cvFile);
+  data.idCard = await uploadToCloudinary(idFile);
+  data.photo = await uploadToCloudinary(photoFile);
+
+  // --- Send data to Google Sheets ---
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyVI1JFhMEhaaIiQoI4Q-_lJN24DPOSe2thuoc2WoBdKD1tpt1G_V6U3ZkKWDJO0w8-6g/exec";
+
+  try {
+    const res = await fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const result = await res.json();
+
+    if (result.status === "success") {
+      document.querySelectorAll(".form-page").forEach(p => p.classList.remove("active"));
+      document.getElementById("successMessage").classList.add("active");
+    } else {
+      alert("حدث خطأ أثناء الإرسال: " + result.message);
     }
+  } catch (err) {
+    alert("فشل الاتصال بالسيرفر: " + err.message);
+  }
+});
 
-    // === FILES ===
-    const cvFile = document.getElementById('cv').files[0];
-    const idFile = document.getElementById('idCard').files[0];
-    const photoFile = document.getElementById('photo').files[0];
-
-    async function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          resolve({
-            name: file.name,
-            type: file.type,
-            content: base64
-          });
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // === CONVERT FILES TO BASE64 ===
-    data.cv = await fileToBase64(cvFile);
-    data.idCard = await fileToBase64(idFile);
-    data.photo = await fileToBase64(photoFile);
-
-    // === SEND TO GOOGLE SCRIPT ===
-    const scriptURL = '/.netlify/functions/submit';
-
-    try {
-      const res = await fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      const result = await res.json();
-
-      if (result.status === 'success') {
-        document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
-        document.getElementById('successMessage').classList.add('active');
-      } else {
-        alert('حدث خطأ أثناء الإرسال: ' + result.message);
-      }
-
-    } catch (err) {
-      alert('فشل الاتصال بالسيرفر: ' + err.message);
-    }
-  });
 </script>
 
 </body>

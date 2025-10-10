@@ -323,7 +323,7 @@
             }
         }
         input.error, select.error, textarea.error {
-    border: 2px solid #e74c3c;
+    border: 2px solid #e74c3c !important;
     background-color: #fff5f5;
 }
 
