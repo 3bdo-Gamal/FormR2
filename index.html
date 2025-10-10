@@ -433,7 +433,7 @@
     return isValid;
 }
 
-  document.getElementById('mainForm').addEventListener('submit', async function (e) {
+document.getElementById('mainForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const formElements = new FormData(this);
@@ -448,7 +448,7 @@
     const url = `https://api.cloudinary.com/v1_1/dhfjfi5nd/upload`;
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "unsigned_upload"); // استخدم الـpreset اللي عملته
+    formData.append("upload_preset", "unsigned_upload");
 
     const res = await fetch(url, { method: "POST", body: formData });
     const result = await res.json();
@@ -463,14 +463,14 @@
   data.idCard = await uploadToCloudinary(idFile);
   data.photo = await uploadToCloudinary(photoFile);
 
-  // --- Send data to Google Sheets ---
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzjzQxt28tZCqI6CsnnvIBZfiMcVGX3viL10G00ayDO0RVlSemeRYHGQ52a5ZVHhXVJqA/exec";
+  // --- Send data to your backend (instead of Google Script) ---
+ const SERVER_URL = "https://formr2back-production.up.railway.app/submit";
 
   try {
-    const res = await fetch(scriptURL, {
+    const res = await fetch(SERVER_URL, {
       method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
 
     const result = await res.json();
