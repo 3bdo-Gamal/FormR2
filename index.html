@@ -443,36 +443,35 @@ document.getElementById('mainForm').addEventListener('submit', async function (e
     if (!(value instanceof File)) data[key] = value;
   }
 
-// --- Upload files to Cloudinary ---
-async function uploadToCloudinary(file, resourceType) {
-  const url = `https://api.cloudinary.com/v1_1/dhfjfi5nd/upload`;
+async function uploadToCloudinary(file, type) {
+  const url = "https://api.cloudinary.com/v1_1/dhfjfi5nd/upload";
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "unsigned_upload");
-  if (resourceType) formData.append("resource_type", resourceType); // image / raw
+
+  // تحديد نوع المورد
+  if (type === "raw") {
+    formData.append("resource_type", "raw"); // PDF/DOC
+  } else {
+    formData.append("resource_type", "image"); // صور
+  }
 
   const res = await fetch(url, { method: "POST", body: formData });
   const result = await res.json();
+
+  if (result.error) throw new Error(result.error.message);
+
   return result.secure_url;
 }
 
+// مثال الاستخدام عند رفع الملفات:
 const cvFile = document.getElementById('cv').files[0];
 const idFile = document.getElementById('idCard').files[0];
 const photoFile = document.getElementById('photo').files[0];
 
-if (cvFile) {
-  // فقط ملفات PDF / DOC / DOCX
-  const allowedCV = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-  if (!allowedCV.includes(cvFile.type)) {
-    alert("ملف السيرة الذاتية يجب أن يكون PDF أو DOC/DOCX فقط");
-    return;
-  }
-  data.cv = await uploadToCloudinary(cvFile, "raw"); 
-}
-
-// الصور فقط
-if (idFile) data.idCard = await uploadToCloudinary(idFile, "image");
-if (photoFile) data.photo = await uploadToCloudinary(photoFile, "image");
+if (cvFile) data.cv = await uploadToCloudinary(cvFile, "raw");   // PDF/DOC
+if (idFile) data.idCard = await uploadToCloudinary(idFile, "image"); // صور
+if (photoFile) data.photo = await uploadToCloudinary(photoFile, "image"); // صور
   // --- Send data to your backend (instead of Google Script) ---
  const SERVER_URL = "https://formr2back-production.up.railway.app/submit";
 
