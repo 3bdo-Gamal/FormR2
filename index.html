@@ -349,144 +349,150 @@
     </div>
 
 <script>
-  let currentPage = 1;
+let currentPage = 1;
 
-  // === VALIDATION (نفس اللي عندك بالضبط، ممكن تسيبه زي ما هو) ===
-  const validationRules = {
-    name: { validate: (v) => v.length >= 3, message: 'الاسم يجب أن يكون 3 أحرف على الأقل' },
-    age: { validate: (v) => v >= 18 && v <= 60, message: 'السن يجب أن يكون بين 18 و 60 سنة' },
-    nationalId: { validate: (v) => /^[0-9]{14}$/.test(v), message: 'الرقم القومي يجب أن يكون 14 رقم فقط' },
-    phone: { validate: (v) => /^01[0125][0-9]{8}$/.test(v), message: 'رقم التليفون يجب أن يبدأ بـ 01 ويكون 11 رقم' },
-    whatsapp: { validate: (v) => /^01[0125][0-9]{8}$/.test(v), message: 'رقم الواتس يجب أن يبدأ بـ 01 ويكون 11 رقم' },
-    email: { validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), message: 'البريد الإلكتروني غير صحيح' },
-    graduationYear: { validate: (v) => v >= 2010 && v <= 2030, message: 'سنة التخرج يجب أن تكون بين 2010 و 2030' }
-  };
+// === Validation Rules ===
+const validationRules = {
+  name: { validate: (v) => v.length >= 3, message: 'الاسم يجب أن يكون 3 أحرف على الأقل' },
+  age: { validate: (v) => v >= 18 && v <= 60, message: 'السن يجب أن يكون بين 18 و 60 سنة' },
+  nationalId: { validate: (v) => /^[0-9]{14}$/.test(v), message: 'الرقم القومي يجب أن يكون 14 رقم فقط' },
+  phone: { validate: (v) => /^01[0125][0-9]{8}$/.test(v), message: 'رقم التليفون يجب أن يبدأ بـ 01 ويكون 11 رقم' },
+  whatsapp: { validate: (v) => /^01[0125][0-9]{8}$/.test(v), message: 'رقم الواتس يجب أن يبدأ بـ 01 ويكون 11 رقم' },
+  email: { validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), message: 'البريد الإلكتروني غير صحيح' },
+  graduationYear: { validate: (v) => v >= 2010 && v <= 2030, message: 'سنة التخرج يجب أن تكون بين 2010 و 2030' }
+};
 
-  // === PAGE SWITCHING ===
-  function nextPage() {
-    if (!validatePage(currentPage)) return;
-    document.getElementById(`page${currentPage}`).classList.remove('active');
-    currentPage++;
-    document.getElementById(`page${currentPage}`).classList.add('active');
-    updateProgress();
-    window.scrollTo(0, 0);
-  }
-
-  function prevPage() {
-    document.getElementById(`page${currentPage}`).classList.remove('active');
-    currentPage--;
-    document.getElementById(`page${currentPage}`).classList.add('active');
-    updateProgress();
-    window.scrollTo(0, 0);
-  }
-
-  function updateProgress() {
-    document.getElementById('progressText').textContent = `${currentPage} / 3`;
-    document.getElementById('progressBar').style.width = `${(currentPage / 3) * 100}%`;
-  }
-
-  function validatePage(pageNum) {
-    const page = document.getElementById(`page${pageNum}`);
-    const inputs = page.querySelectorAll('input[required], select[required], textarea[required]');
-    let isValid = true;
-    let firstErrorField = null;
-
-    for (let input of inputs) {
-        const fieldName = input.name;
-        const rule = validationRules[fieldName];
-        const errorDiv = document.getElementById(`${fieldName}-error`);
-        let fieldValid = true;
-
-        // تحقق من القيم الفاضية أولاً
-        if (!input.value) {
-            input.classList.add('error');
-            if (errorDiv) {
-                errorDiv.textContent = 'هذا الحقل مطلوب';
-                errorDiv.classList.add('show');
-            }
-            isValid = false;
-            fieldValid = false;
-            if (!firstErrorField) firstErrorField = input;
-        } else if (rule && !rule.validate(input.value)) {
-            // لو عنده قاعدة تحقق خاصة
-            input.classList.add('error');
-            if (errorDiv) {
-                errorDiv.textContent = rule.message;
-                errorDiv.classList.add('show');
-            }
-            isValid = false;
-            fieldValid = false;
-            if (!firstErrorField) firstErrorField = input;
-        } else {
-            // لو تمام
-            input.classList.remove('error');
-            if (errorDiv) errorDiv.classList.remove('show');
-        }
-    }
-
-    // لو في خطأ → يروح لأول خانة فيها المشكلة
-    if (!isValid && firstErrorField) {
-        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        firstErrorField.focus();
-    }
-
-    return isValid;
+// === Page Switching ===
+function nextPage() {
+  if (!validatePage(currentPage)) return;
+  document.getElementById(`page${currentPage}`).classList.remove('active');
+  currentPage++;
+  document.getElementById(`page${currentPage}`).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
 }
 
-const SERVER_URL = "https://formr2back-production.up.railway.app/submit";
+function prevPage() {
+  document.getElementById(`page${currentPage}`).classList.remove('active');
+  currentPage--;
+  document.getElementById(`page${currentPage}`).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
 
+function updateProgress() {
+  document.getElementById('progressText').textContent = `${currentPage} / 3`;
+  document.getElementById('progressBar').style.width = `${(currentPage / 3) * 100}%`;
+}
+
+function validatePage(pageNum) {
+  const page = document.getElementById(`page${pageNum}`);
+  const inputs = page.querySelectorAll('input[required], select[required], textarea[required]');
+  let isValid = true;
+  let firstErrorField = null;
+
+  for (let input of inputs) {
+    const fieldName = input.name;
+    const rule = validationRules[fieldName];
+    const errorDiv = document.getElementById(`${fieldName}-error`);
+    let fieldValid = true;
+
+    if (!input.value) {
+      input.classList.add('error');
+      if (errorDiv) errorDiv.textContent = 'هذا الحقل مطلوب';
+      isValid = false;
+      fieldValid = false;
+      if (!firstErrorField) firstErrorField = input;
+    } else if (rule && !rule.validate(input.value)) {
+      input.classList.add('error');
+      if (errorDiv) errorDiv.textContent = rule.message;
+      isValid = false;
+      fieldValid = false;
+      if (!firstErrorField) firstErrorField = input;
+    } else {
+      input.classList.remove('error');
+      if (errorDiv) errorDiv.textContent = '';
+    }
+  }
+
+  if (!isValid && firstErrorField) {
+    firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    firstErrorField.focus();
+  }
+
+  return isValid;
+}
+
+// --- Handle Form Submission ---
 document.getElementById('mainForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
+  if (!validatePage(currentPage)) return;
+
   const formElements = new FormData(this);
   const data = {};
-
   for (let [key, value] of formElements.entries()) {
     if (!(value instanceof File)) data[key] = value;
   }
 
-  async function uploadToCloudinary(file, type) {
-    const url = "https://api.cloudinary.com/v1_1/dhfjfi5nd/upload";
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "unsigned_upload");
-    if (type === "raw") formData.append("resource_type", "raw");
-    else formData.append("resource_type", "image");
-
-    const res = await fetch(url, { method: "POST", body: formData });
-    const result = await res.json();
-    if (result.error) throw new Error(result.error.message);
-    return result.secure_url;
-  }
-
-  const cvFile = document.getElementById('cv').files[0];
-  const idFile = document.getElementById('idCard').files[0];
-  const photoFile = document.getElementById('photo').files[0];
-
-  if (cvFile) data.cv = await uploadToCloudinary(cvFile, "raw");
-  if (idFile) data.idCard = await uploadToCloudinary(idFile, "image");
-  if (photoFile) data.photo = await uploadToCloudinary(photoFile, "image");
+  const SERVER_URL = "https://formr2back-production.up.railway.app";
 
   try {
-    const res = await fetch(SERVER_URL, {
+    // 1️⃣ تحقق من الرقم القومي أولاً
+    const checkResp = await fetch(`${SERVER_URL}/check-nid`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nationalId: data.nationalId })
+    });
+    const checkResult = await checkResp.json();
+
+    if (checkResult.exists) {
+      alert("الرقم القومي مسجل بالفعل — لا يمكن الإرسال مرتين.");
+      return;
+    }
+
+    // 2️⃣ رفع الملفات بعد التأكد من الرقم القومي
+    async function uploadToCloudinary(file, type) {
+      const url = "https://api.cloudinary.com/v1_1/dhfjfi5nd/upload";
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "unsigned_upload");
+      formData.append("resource_type", type === "raw" ? "raw" : "image");
+      const res = await fetch(url, { method: "POST", body: formData });
+      const result = await res.json();
+      if (result.error) throw new Error(result.error.message);
+      return result.secure_url;
+    }
+
+    const cvFile = document.getElementById('cv').files[0];
+    const idFile = document.getElementById('idCard').files[0];
+    const photoFile = document.getElementById('photo').files[0];
+
+    if (cvFile) data.cv = await uploadToCloudinary(cvFile, "raw");
+    if (idFile) data.idCard = await uploadToCloudinary(idFile, "image");
+    if (photoFile) data.photo = await uploadToCloudinary(photoFile, "image");
+
+    // 3️⃣ إرسال البيانات للسيرفر بعد رفع الملفات
+    const res = await fetch(`${SERVER_URL}/submit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
-
     const result = await res.json();
+
     if (result.status === "success") {
       document.querySelectorAll(".form-page").forEach(p => p.classList.remove("active"));
       document.getElementById("successMessage").classList.add("active");
     } else {
       alert("حدث خطأ أثناء الإرسال: " + result.message);
     }
+
   } catch (err) {
     alert("فشل الاتصال بالسيرفر: " + err.message);
   }
 });
-
 </script>
+
 
 </body>
 </html>
