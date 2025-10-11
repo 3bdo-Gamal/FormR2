@@ -386,39 +386,54 @@
       document.getElementById('progressBar').style.width = `${(currentPage / 3) * 100}%`;
     }
 
-    function validatePage(pageNum) {
+   function validatePage(pageNum) {
   const page = document.getElementById(`page${pageNum}`);
   const inputs = page.querySelectorAll('input[required], select[required], textarea[required]');
   let isValid = true;
 
-  for (let input of inputs) {
+  inputs.forEach(input => {
     const fieldName = input.name;
     const rule = validationRules[fieldName];
     const errorDiv = document.getElementById(`${fieldName}-error`);
 
-    // 🔹 تحقق خاص بأسئلة الراديو (نعم / لا)
+    // ✅ معالجة خاصة للراديو (نعم / لا)
     if (input.type === 'radio') {
       const radios = page.querySelectorAll(`input[name="${fieldName}"]`);
       const checked = Array.from(radios).some(r => r.checked);
+
       if (!checked) {
         isValid = false;
-        if (errorDiv) errorDiv.textContent = 'الرجاء اختيار إجابة';
+        radios.forEach(r => r.classList.add('error'));
+        if (errorDiv) {
+          errorDiv.textContent = 'الرجاء اختيار إجابة';
+          errorDiv.classList.add('show');
+        }
       } else {
-        if (errorDiv) errorDiv.textContent = '';
+        radios.forEach(r => r.classList.remove('error'));
+        if (errorDiv) {
+          errorDiv.textContent = '';
+          errorDiv.classList.remove('show');
+        }
       }
-      continue;
+      return; // نخرج من اللوب للراديو
     }
 
-    // 🔹 تحقق الحقول العادية
+    // ✅ معالجة باقي الحقول
     if (!input.value || (rule && !rule.validate(input.value))) {
       input.classList.add('error');
-      if (errorDiv) errorDiv.textContent = rule ? rule.message : 'هذا الحقل مطلوب';
+      if (errorDiv) {
+        errorDiv.textContent = rule ? rule.message : 'هذا الحقل مطلوب';
+        errorDiv.classList.add('show');
+      }
       isValid = false;
     } else {
       input.classList.remove('error');
-      if (errorDiv) errorDiv.textContent = '';
+      if (errorDiv) {
+        errorDiv.textContent = '';
+        errorDiv.classList.remove('show');
+      }
     }
-  }
+  });
 
   return isValid;
 }
