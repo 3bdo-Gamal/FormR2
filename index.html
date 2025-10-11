@@ -152,7 +152,7 @@
 
     <div class="form-group">
       <label>سنة التخرج <span class="required">*</span></label>
-      <input type="number" name="graduationYear" required min="2010" max="2030" id="graduationYear">
+      <input type="number" name="graduationYear" required min="2010" max="2035" id="graduationYear">
       <div class="error-message" id="graduationYear-error"></div>
     </div>
 
@@ -160,7 +160,7 @@
       <label>هل حضرت المرحلة الأولى من البرنامج؟ <span class="required">*</span></label>
       <div class="radio-group">
         <div class="radio-option">
-          <input type="radio" name="phase1" value="نعم" required id="phase1Yes">
+          <input type="radio"  name="phase1" value="نعم" required id="phase1Yes">
           <label for="phase1Yes">نعم</label>
         </div>
         <div class="radio-option">
@@ -387,24 +387,41 @@
     }
 
     function validatePage(pageNum) {
-      const page = document.getElementById(`page${pageNum}`);
-      const inputs = page.querySelectorAll('input[required], select[required], textarea[required]');
-      let isValid = true;
-      for (let input of inputs) {
-        const fieldName = input.name;
-        const rule = validationRules[fieldName];
-        const errorDiv = document.getElementById(`${fieldName}-error`);
-        if (!input.value || (rule && !rule.validate(input.value))) {
-          input.classList.add('error');
-          if (errorDiv) errorDiv.textContent = rule ? rule.message : 'هذا الحقل مطلوب';
-          isValid = false;
-        } else {
-          input.classList.remove('error');
-          if (errorDiv) errorDiv.textContent = '';
-        }
+  const page = document.getElementById(`page${pageNum}`);
+  const inputs = page.querySelectorAll('input[required], select[required], textarea[required]');
+  let isValid = true;
+
+  for (let input of inputs) {
+    const fieldName = input.name;
+    const rule = validationRules[fieldName];
+    const errorDiv = document.getElementById(`${fieldName}-error`);
+
+    // 🔹 تحقق خاص بأسئلة الراديو (نعم / لا)
+    if (input.type === 'radio') {
+      const radios = page.querySelectorAll(`input[name="${fieldName}"]`);
+      const checked = Array.from(radios).some(r => r.checked);
+      if (!checked) {
+        isValid = false;
+        if (errorDiv) errorDiv.textContent = 'الرجاء اختيار إجابة';
+      } else {
+        if (errorDiv) errorDiv.textContent = '';
       }
-      return isValid;
+      continue;
     }
+
+    // 🔹 تحقق الحقول العادية
+    if (!input.value || (rule && !rule.validate(input.value))) {
+      input.classList.add('error');
+      if (errorDiv) errorDiv.textContent = rule ? rule.message : 'هذا الحقل مطلوب';
+      isValid = false;
+    } else {
+      input.classList.remove('error');
+      if (errorDiv) errorDiv.textContent = '';
+    }
+  }
+
+  return isValid;
+}
 
     document.getElementById('mainForm').addEventListener('submit', async (e) => {
       e.preventDefault();
