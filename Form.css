@@ -337,4 +337,36 @@
 .error-message.show {
     display: block;
 }
-    
+.loading-overlay {
+  display: none; /* مخفي افتراضياً */
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Cairo", sans-serif;
+  font-size: 18px;
+  color: #0b8b6f;
+}
+
+.loading-overlay.active {
+  display: flex; /* يظهر عند الإرسال فقط */
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #0b8b6f;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
