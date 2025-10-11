@@ -469,6 +469,19 @@ const cvFile = document.getElementById('cv').files[0];
 const idFile = document.getElementById('idCard').files[0];
 const photoFile = document.getElementById('photo').files[0];
 
+const resCheck = await fetch(SERVER_URL + "/check", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ nationalId: data.nationalId })
+});
+const checkResult = await resCheck.json();
+
+if(checkResult.status !== "ok") {
+  alert(checkResult.message);
+  return; // يوقف التنفيذ
+}
+
+
 if (cvFile) data.cv = await uploadToCloudinary(cvFile, "raw");   // PDF/DOC
 if (idFile) data.idCard = await uploadToCloudinary(idFile, "image"); // صور
 if (photoFile) data.photo = await uploadToCloudinary(photoFile, "image"); // صور
