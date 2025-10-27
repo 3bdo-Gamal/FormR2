@@ -151,10 +151,23 @@
     </div>
 
     <div class="form-group">
+        <label for="grade">التقدير لأخر عام <span class="required">*</span></label>
+        <select id="grade" name="grade" required>
+          <option value="" disabled selected>اختر التقدير...</option>
+          <option value="ممتاز">ممتاز</option>
+          <option value="جيد جدًا">جيد جدًا</option>
+          <option value="جيد">جيد</option>
+          <option value="مقبول">مقبول</option>
+        </select>
+        <div class="error-message" id="grade-error"></div>
+      </div>
+
+    <div class="form-group">
       <label>سنة التخرج <span class="required">*</span></label>
       <input type="number" name="graduationYear" required min="2010" max="2035" id="graduationYear">
       <div class="error-message" id="graduationYear-error"></div>
     </div>
+
 
     <div class="form-group">
       <label>هل حضرت المرحلة الأولى من البرنامج؟ <span class="required">*</span></label>
@@ -391,7 +404,7 @@
     const rule = validationRules[fieldName];
     const errorDiv = document.getElementById(`${fieldName}-error`);
 
-    // ✅ معالجة خاصة للراديو (نعم / لا)
+    
     if (input.type === 'radio') {
       const radios = page.querySelectorAll(`input[name="${fieldName}"]`);
       const checked = Array.from(radios).some(r => r.checked);
@@ -410,10 +423,10 @@
           errorDiv.classList.remove('show');
         }
       }
-      return; // نخرج من اللوب للراديو
+      return; 
     }
 
-    // ✅ معالجة باقي الحقول
+    
     if (!input.value || (rule && !rule.validate(input.value))) {
       input.classList.add('error');
       if (errorDiv) {
